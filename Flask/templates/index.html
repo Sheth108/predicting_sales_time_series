@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Predicting Sales</title>
+  <style>
+  body{
+    font-family: sans-serif;
+  }
+  .button {
+    background-color: Gray;
+    border: none;
+    color: Black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 24px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  .animal-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    box-shadow: 10px 10px 0px #eee;
+    width: 300px;
+    margin: auto;
+  }
+  </style>
+
+</head>
+
+<body align="center">
+
+  <h2>Enter in the following information and you will get a prediction for the amount of sales in  the chosen amount of days:</h2>
+
+  <form action="/predict_sales/" method="post">
+
+    <div class="animal-card" align="center">
+
+      Store Number:
+      <br>
+        <input type="text" name='storeNum'>
+      <br>
+      
+      Item Number:
+      <br>
+        <input type="text" name='itemNum'>
+      <br>
+
+      Number of upcoming days to predict sales for:
+      <br>
+        <input type="text" name='numDays'>
+      <br>
+      
+      Enter 'True' for detailed analysis, 'False' for listing of predictions by day:
+      <br>
+      	<input type="text" name='totalInfo'>
+      <br>
+
+      Enter 'True' for brief summary on forecast, 'False' for no brief summary:
+      <br>
+        <input type="text" name='printSummary'>
+      <br>
+
+      Enter 'True' for JSON file format, 'False' for DataFrame format:
+      <br>
+        <input type="text" name='JSON'>
+      <br>
+
+    </div>
+
+  <br>
+
+  <button type="submit" class="button">
+    Get predictions
+  </button>
+  </form>
+
+  <br>
+
+  {% if message %}
+  <h2>{{message}}</h2>
+  {% endif %}
+
+  {% if noInfo %}
+    <table>
+     <tr>
+        <th>Date</th>
+        <th>Predicted Sales</th>
+     </tr>
+
+     {% for key in forecast %}
+     <tr>
+        <td>{{ key }}</td>
+        <td>{{ forecast[key] }}</td>
+     </tr>
+     {% endfor %}
+    </table>
+  {% endif %}
+
+  {% if pd %}
+    <table class="centerTable">
+     <tr>
+        <th>Date</th>
+        <th>Predicted Sales</th>
+     </tr>
+
+     {% for key in forecast.index %}
+     <tr>
+        <td>{{ key }}</td>
+        <td>{{ forecast[key] }}</td>
+     </tr>
+     {% endfor %}
+    </table>
+  {% endif %}
+
+  {% if info %}
+  {{ forecast | safe }}
+  {% endif %}
+
+
+</body>
+</html>
