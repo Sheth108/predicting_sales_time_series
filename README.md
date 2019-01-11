@@ -32,11 +32,11 @@ This folder is very similar to the Flask folder described above, however it was 
 
 ## Flask Toned Down Video
 
-This video demonstrates the use of the toned down Flask app.
+This downloadable video demonstrates the use of the toned down Flask app.
 
 ## Flask Video JSOn
 
-This video demonstrates the use of the Flask app, showing the full output if the extra columns are added and the file is converted to JSON.
+This downlaodable video demonstrates the use of the Flask app, showing the full output if the extra columns are added and the file is converted to JSON.
 
 ## Predicting Sales Presentation
 
