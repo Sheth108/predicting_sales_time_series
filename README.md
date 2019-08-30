@@ -3,15 +3,12 @@
 In this project, I downloaded a dataset from kaggle which contained the sales of 50 different items (differentiated by numbers 1-50) across 10 different stores (differentiated by numbers 1-10) over the span of five years (Jan. 1, 2013 - Dec. 31, 2017). The data was stored on an AWS Relational Database Service, and a flask app was created which runs the modeling process through a backend pipeline. The reason it has to run the process each time is due to each item-store combination being different from the next, which amounts to 500 total different models. The flask app gives an option of displaying a basic table showing the predicted sales by day and the total, or getting many more columns of data per day such as trend, upper limit, lower limit, etc.
 
 ## train.csv
-
 The data is initially stored in this csv file.
 
 ## ARIMA and Winter Holts Modeling
-
 The inital modeling I did was pretty much just experimenting with the data. I figured seasonal modeling on item-store combinations would be the best way to go in the end, however in this file I looked at simpler models. The first model filters the data by store, and creates predictions of the sum total for all of the items. The second model filters on store and item, however with no seasonal component. These are both ARIMA models, and there was not enough data to try and create a seasonal model using ARIMA. The next model was a Winter-Holts model (filtered on item-store), and due to the seasonal components, this model far outperformed the first two. After each model there is a graph where the red lines indicate the predictions for sales and the blue represent the actual. At the end I was trying to look for patterns in residuals by month, and seeing if year to year the model was under- or over-predicting the sales in a pattern.
 
 ## Facebook Prophet Seasonal Modeling
-
 The first step here is to split up the data into train/test data. This works differently than other models, because the data is ordered by date. So the first two-thirds of the data is taken create the model and the final third is for testing (these proportions can be adjusted). After this, a model with seasonality is created using Facebook Prophet based upon the item-store combination. This model is more indicative of the future sales than any of the other models. Similar to the last file, a graph is shown and the residuals between months was looked at.
 
 ## Data to RDS
